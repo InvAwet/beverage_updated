@@ -16,16 +16,21 @@ jobs:
     - name: Checkout Code
       uses: actions/checkout@v2
 
-    - name: Set up JDK
-      uses: actions/setup-java@v2
+    - name: Set up Node.js
+      uses: actions/setup-node@v2
       with:
-        java-version: '11'
+        node-version: '16'  # or whatever version you need
 
-    - name: Build with Gradle
-      run: ./gradlew build
+    - name: Install dependencies
+      run: |
+        npm install
+
+    - name: Build the project
+      run: |
+        npm run build
 
     - name: Upload Artifact
       uses: actions/upload-artifact@v2
       with:
         name: build-artifact
-        path: ./build/libs/*
+        path: ./dist/*
