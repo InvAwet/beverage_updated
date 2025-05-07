@@ -1,4 +1,4 @@
-name: Build and Deploy
+name: Build and Upload Artifacts
 
 on:
   push:
@@ -19,18 +19,19 @@ jobs:
     - name: Set up Node.js
       uses: actions/setup-node@v2
       with:
-        node-version: '16'  # or whatever version you need
+        node-version: '16'
 
     - name: Install dependencies
-      run: |
-        npm install
+      run: npm install
 
     - name: Build the project
-      run: |
-        npm run build
+      run: npm run build
+
+    - name: List dist directory
+      run: ls -la ./dist
 
     - name: Upload Artifact
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: build-artifact
         path: ./dist/*
